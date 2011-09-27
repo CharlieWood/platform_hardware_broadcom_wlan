@@ -19,7 +19,7 @@ $(bcm4329_mod) : kernelimage FORCE | $(ACP)
 	mkdir -p $(BCM4329_OUT)
 	+$(MAKE) -C $(BCM4329_ROOT) \
 		ARCH=arm \
-		CROSS_COMPILE=${ANDROID_BUILD_TOP}/$(TARGET_TOOLS_PREFIX) \
+		CROSS_COMPILE=${ANDROID_BUILD_TOP}/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi- \
 		LINUXVER=2.6.35 \
 		LINUXDIR=${ANDROID_BUILD_TOP}/kernel_imx \
 		OBJDIR=$(BCM4329_OUT) \
