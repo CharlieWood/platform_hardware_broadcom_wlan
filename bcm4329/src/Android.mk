@@ -39,3 +39,5 @@ LOCAL_MODULE_TAGS := debug tests
 include $(BUILD_EXECUTABLE)
 
 endif  # TARGET_SIMULATOR != true
+
+include $(LOCAL_PATH)/dhd/linux/Android.mk

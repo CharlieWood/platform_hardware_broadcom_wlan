@@ -227,6 +227,19 @@ ifneq ($(findstring -softap-,-$(TARGET)-),)
 DFLAGS += -DSOFTAP
 CFILES += sha1.c md5.c
 endif
+ifneq ($(findstring -imx5x-,-$(TARGET)-),)
+DFLAGS += -DOEM_ANDROID -DEMBEDDED_PLATFORM -DARP_OFFLOAD_SUPPORT -DPKT_FILTER_SUPPORT
+DFLAGS += -Dlinux
+DFLAGS += -DBCMDBG
+#DFLAGS += -DDHD_USE_STATIC_BUF
+DFLAGS += -DCUSTOMER_HW2
+DFLAGS += -DCONFIG_WIFI_CONTROL_FUNC
+#DFLAGS += -DCUSTOM_OOB_GPIO_NUM=152
+#DFLAGS += -DOOB_INTR_ONLY
+#DFLAGS += -DMMC_SDIO_ABORT
+DFLAGS += -DSOFTAP
+#DFLAsGS += -DPNO_SUPPORT
+endif
 ifneq ($(findstring -nexus-,-$(TARGET)-),)
 DFLAGS += -DOEM_ANDROID -DEMBEDDED_PLATFORM -DARP_OFFLOAD_SUPPORT -DPKT_FILTER_SUPPORT
 DFLAGS += -Dlinux
@@ -311,6 +324,7 @@ TARGETS := \
 	dhd-cdc-sdstd-apsta \
 	dhd-cdc-sdmmc-softap-gpl
 
+TARGETS += dhd-cdc-sdmmc-imx5x-gpl
 
 TARGETS += \
 	dhd-cdc-sdio-dnglimage dhd-cdc-sdspi-pci-dnglimage \
