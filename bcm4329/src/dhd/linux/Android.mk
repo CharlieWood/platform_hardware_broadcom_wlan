@@ -1,4 +1,4 @@
-#Android makefile to build kernel module
+#Android makefile to build dhd kernel module
 
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
@@ -9,8 +9,7 @@ endif
 
 BCM4329_ROOT := $(LOCAL_PATH)
 BCM4329_OUT := $(ANDROID_BUILD_TOP)/$(PRODUCT_OUT)/obj/bcm4329
-
-bcm4329_mod := $(ANDROID_BUILD_TOP)/$(TARGET_OUT)/lib/modules/bcm4329.ko
+bcm4329_mod := $(BCM4329_OUT)/dhd.ko
 
 bcm4329: $(bcm4329_mod)
 
@@ -22,10 +21,9 @@ $(bcm4329_mod) : kernelimage FORCE | $(ACP)
 		ARCH=arm \
 		CROSS_COMPILE=${ANDROID_BUILD_TOP}/$(TARGET_TOOLS_PREFIX) \
 		LINUXVER=2.6.35 \
-		LINUXDIR=${ANDROID_BUILD_TOP}/$(PRODUCT_OUT)/obj/kernel \
+		LINUXDIR=${ANDROID_BUILD_TOP}/kernel_imx \
 		OBJDIR=$(BCM4329_OUT) \
 		$(BCM4329_WIFI_MOD_CONFIG_NAME)
-	@echo "Install: $@"
-	$(hide) $(ACP) $(BCM4329_OUT)/dhd.ko $@
 
-ALL_PREBUILT += bcm4329
+PRODUCT_COPY_FILES += \
+	$(bcm4329_mod):system/lib/modules/bcm4329.ko
